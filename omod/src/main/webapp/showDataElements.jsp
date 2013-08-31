@@ -63,15 +63,16 @@
 					<th><spring:message code="integration.general.code"/></th>
 					<th><spring:message code="integration.general.mappedTo"/></th>
 					<th><spring:message code="integration.dhis.categoryCombo"/></th>
-					<th><spring:message code="integration.general.lastUpdated"/></th>
-					<th align="center" width="1%"><spring:message code="integration.general.lastUpdated"/><spring:message code="integration.general.editMapping"/></th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach items="${DataElementToCategoryComboDictionary}" var="element" >
 					<tr id="${element.key.dataElementId}">
 						<td width="10%" id="name${element.key.dataElementId}" >
-							${element.key.dataElementName}
+							<a href="javascript:editDataElement('${element.key.dataElementId}');">${element.key.dataElementName}</a>
+							<div id="addOrEditPopup${element.key.dataElementId}" class="addOrEditPopup">
+						<openmrs:portlet url="mappingCohort.portlet" id="mappingCohort${element.key.dataElementId}" moduleId="integration" parameters="type=DataElement|mappedCohort=${element.key.cohortDefinitionUuid}|portletId=${element.key.dataElementId}" />
+					</div>
 						</td>
 						<td width="10%" id="code${element.key.dataElementId}">
 							${element.key.dataElementCode}
@@ -82,18 +83,7 @@
 						<td width="20%">
 						${element.value.name}
 						</td>
-						<td width="20%">
-							${key.key.lastUpdated}
-						</td>
-						<td width="1%" align="center" nowrap>
-							&nbsp;
-							<a href="javascript:editDataElement('${element.key.dataElementId}');"><img src="<c:url value='/images/edit.gif'/>" border="0" title='<spring:message code="integration.tooltips.mapDataElement"/>'/></a>
-					<div id="addOrEditPopup${element.key.dataElementId}" class="addOrEditPopup">
-						<openmrs:portlet url="mappingCohort.portlet" id="mappingCohort${element.key.dataElementId}" moduleId="integration" parameters="type=DataElement|mappedCohort=${element.key.cohortDefinitionUuid}|portletId=${element.key.dataElementId}" />
-					</div>
-						</td>
-					</tr>
-					
+					</tr>			
 				</c:forEach>
 			</tbody>
 			<tfoot>

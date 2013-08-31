@@ -52,6 +52,7 @@
 			$("#id").val(id);
 			$("#reportName").val($.trim($("#name"+id).html()));
 			$("#mappedReport").val($.trim($("#mappedReport"+id).html()));
+			$("#baseCohort").val($.trim($("#baseCohort"+id).html()));
 			$('#editReportTemplateMapping').dialog('open');
 		}
 		function saveReportTemplate() {
@@ -112,7 +113,7 @@
 		            });
 		}
 </script>
-<h2><spring:message code="integration.serverAdmin"/> : ${server.serverName}</h2>
+<h2><spring:message code="integration.header.reportsForServer"/> : ${server.serverName}</h2>
 
 <div >
 			<br/>
@@ -126,7 +127,6 @@
 					<th><spring:message code="integration.general.baseCohort"/></th>
 					<th><spring:message code="integration.general.reportMappedTo"/></th>
 					<th><spring:message code="integration.general.validMappings"/></th>
-					<th><spring:message code="integration.general.lastUpdated"/></th>
 					<th align="center" width="1%"><spring:message code="integration.general.actions"/></th>
 				</tr>
 			</thead>
@@ -150,9 +150,6 @@
 						</td>
 						<td width="10%" id="check${reportTemplate.reportTemplateId}">
 							<input type="checkbox" checked="checked">
-						</td>
-						<td width="10%" id="lastUpdated${reportTemplate.reportTemplateId}">
-							${reportTemplate.lastUpdated}
 						</td>
 						<td align="center" nowrap>
 							<a href="javascript:editReportTemplate('${reportTemplate.reportTemplateId}');"> <button >
@@ -201,7 +198,13 @@
 								<input id="mappedReport" type="text" size="40" /></td>
 							</tr>
 							
-						
+						<tr>
+								<td><spring:message code="integration.general.baseCohort"/></td>
+								<td>:</td>
+								<td>
+								<input id="baseCohort" type="text" size="40" /></td>
+							</tr>
+							
 							<tr>
 								<td></td>
 								<td></td>

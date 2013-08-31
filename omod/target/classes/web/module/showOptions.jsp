@@ -61,7 +61,6 @@
 				<tr>
 					<th><spring:message code="integration.dhis.optionSet"/></th>
 					<th><spring:message code="integration.general.code"/></th>
-					<th><spring:message code="integration.general.mappedTo"/></th>
 					<th><spring:message code="integration.dhis.options"/></th>
 					<th><spring:message code="integration.general.mappedTo"/></th>
 				</tr>
@@ -75,12 +74,9 @@
 						<td width="10%">
 							${optionset.code}
 						</td>
-						<td width="10%">
-							${optionset.uid}
-						</td>
 						<td width="20%">
 						<c:forEach items="${optionset.options}" var="option" >
-							<p><label id="name${option.id}">${option.name}</label><a href="javascript:editOption('${option.id}');"><img src="<c:url value='/images/edit.gif'/>" border="0" title='<spring:message code="integration.tooltips.mapOption"/>'/></a></p>
+							<p><a href="javascript:editOption('${option.id}');"><label id="name${option.id}">${option.name}</label></a></p>
 							</c:forEach>
 						</td>
 						<td>

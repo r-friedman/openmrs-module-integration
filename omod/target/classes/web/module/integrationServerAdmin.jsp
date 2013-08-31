@@ -71,6 +71,7 @@
 					<th><spring:message code="integration.general.name"/></th>
 					<th><spring:message code="integration.general.description"/></th>
 					<th><spring:message code="integration.general.url"/></th>
+					<th><spring:message code="integration.general.lastUpdated"/></th>
 					<th align="center" width="1%"><spring:message code="integration.general.actions"/></th>
 				</tr>
 			</thead>
@@ -88,6 +89,9 @@
 						</td>
 						<td width="20%" id="surl${serverItem.integrationServerId}">
 							${serverItem.url}
+						</td>
+						<td id="slastUpdated${serverItem.integrationServerId}" >
+							${serverItem.lastUpdated}
 						</td>
 						<td id="suserName${serverItem.integrationServerId}" STYLE=display:NONE>
 							${serverItem.userName}
@@ -132,8 +136,8 @@
 			</tbody>
 		</table>
 		<div id="addOrEditPopup">
-					<b class="boxHeader"><spring:message code="integration.server"/></b>
-					<div class="box">
+					
+					<div>
 						<form:form modelAttribute="integrationServer" method="post" id="detailsedit" action="saveIntegrationServer.form" >
 					<table>
 						<tbody>	

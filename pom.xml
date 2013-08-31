@@ -52,9 +52,7 @@
 			-->
 			
 						
-			<!-- Begin OpenMRS modules -->
-			
-			
+			<!-- Begin OpenMRS modules -->	
 						
 			<dependency>
 			
@@ -69,27 +67,27 @@
 			</dependency>
 			
 			<dependency>
-			
+
 				<groupId>org.openmrs.module</groupId>
-												
+
 				<artifactId>calculation-api</artifactId>
-																								
+
 				<version>1.0</version>
-												
+
 				<scope>provided</scope>
-				
+
 			</dependency>
-			
+
 			<dependency>
-			
+
 				<groupId>org.openmrs.module</groupId>
-												
+
 				<artifactId>serialization.xstream-api</artifactId>
-																								
+
 				<version>0.2.7</version>
-												
+
 				<scope>provided</scope>
-				
+
 			</dependency>
 						
 			<!-- End OpenMRS modules -->
