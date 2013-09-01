@@ -40,12 +40,10 @@
     <bean id="ShowDatgaElementsController" class="org.openmrs.module.integration.web.controller.ShowDatgaElementsController"/>
     <bean id="ShowOptionsController" class="org.openmrs.module.integration.web.controller.ShowOptionsController"/>
     
-	
-	 
 	<!-- Annotation based controllers -->
 	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>
-	
+
 	<context:component-scan base-package="org.openmrs.module.integration.web.controller" />
  
-		
+
 </beans>

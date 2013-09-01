@@ -51,6 +51,7 @@
 			$("#password").val($.trim($("#spassword"+id).html()));
 			$("#emailurl").val($.trim($("#semail"+id).html()));
 			$("#masterTemplate").val($.trim($("#smasterTemplate"+id).html()));
+			$("#transportType").val($.trim($("#stransportType"+id).html()));
 
 					$('#addOrEditPopup').dialog('open');
 		}
@@ -70,6 +71,7 @@
 					<th><spring:message code="integration.general.name"/></th>
 					<th><spring:message code="integration.general.description"/></th>
 					<th><spring:message code="integration.general.url"/></th>
+					<th><spring:message code="integration.general.lastUpdated"/></th>
 					<th align="center" width="1%"><spring:message code="integration.general.actions"/></th>
 				</tr>
 			</thead>
@@ -88,6 +90,9 @@
 						<td width="20%" id="surl${serverItem.integrationServerId}">
 							${serverItem.url}
 						</td>
+						<td id="slastUpdated${serverItem.integrationServerId}" >
+							${serverItem.lastUpdated}
+						</td>
 						<td id="suserName${serverItem.integrationServerId}" STYLE=display:NONE>
 							${serverItem.userName}
 						</td>
@@ -99,6 +104,9 @@
 						</td>
 						<td id="smasterTemplate${serverItem.integrationServerId}" STYLE=display:NONE>
 							${serverItem.masterTemplate}
+						</td>
+						<td id="stransportType${serverItem.transportType}" STYLE=display:NONE>
+							${serverItem.transportType}
 						</td>
 						<td width="1%" align="center" nowrap >
 						&nbsp;
@@ -128,8 +136,8 @@
 			</tbody>
 		</table>
 		<div id="addOrEditPopup">
-					<b class="boxHeader"><spring:message code="integration.server"/></b>
-					<div class="box">
+					
+					<div>
 						<form:form modelAttribute="integrationServer" method="post" id="detailsedit" action="saveIntegrationServer.form" >
 					<table>
 						<tbody>	
@@ -166,10 +174,10 @@
 								<td><spring:message code="integration.general.transport"/></td>
 								<td>:</td>
 								<td>
-									<select>
+									<form:select path="transportType" id="transportType">
 									  <option value="Email"><spring:message code="integration.general.email"/></option>
 									  <option value="Url"><spring:message code="integration.general.url"/></option>
-									</select>
+									</form:select>
 									<form:input path="emailorurl" id="emailurl" size="20"/>
 								</td>
 							</tr>

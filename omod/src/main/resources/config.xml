@@ -21,10 +21,10 @@
 	<require_version>${openMRSVersion}</require_version>
 	<!-- / Module Properties -->
 
-	
+
 	<!-- Required Modules -->
 	<require_modules>
-																											
+
 		<require_module version="0.7.8">
 			org.openmrs.module.reporting
 		</require_module>
@@ -36,13 +36,13 @@
 		</require_module>
 	</require_modules>
 	<!-- / Required Modules -->
-	
+
 	<!-- Adds link to admin page -->
 	<extension>
 		<point>org.openmrs.admin.list</point>
 		<class>${project.parent.groupId}.${project.parent.artifactId}.extension.html.AdminList</class>
 	</extension>
-	
+
 	<privilege>
 		<name>Manage Integration Servers</name>
 		<description>Allows the user to manage Integration module Servers</description>
@@ -81,4 +81,3 @@
 	</mappingFiles>
 
 </module>
-

@@ -42,10 +42,12 @@ public class DhisXmlUtilsTest extends BaseModuleContextSensitiveTest {
 		is.setPassword("district");
 		ds=Context.getService(DhisService.class);
 	}
+
 	
 	@Ignore
 	@Test
 	public void dhisXmlUtils_shouldSeeDhisObjects() {
+
 		int n=0;
 		Map<String,ClassMetadata> h=ds.getHibernateClassMetadata();
 		for (String s : h.keySet()) {
@@ -62,6 +64,7 @@ public class DhisXmlUtilsTest extends BaseModuleContextSensitiveTest {
 		h=null;
 		Assert.assertEquals("Dhis objects are missing",n,9);
 	}
+
 
 	@Ignore
 	@Test
@@ -97,7 +100,7 @@ public class DhisXmlUtilsTest extends BaseModuleContextSensitiveTest {
 				nAfter++;
 			}
 		}
-		
+
 		if (nBefore==0 && nAfter==0) {
 			Assert.assertEquals("All patients was not created", nAfter,1);
 		} else if (nBefore==0) {
@@ -136,7 +139,7 @@ public class DhisXmlUtilsTest extends BaseModuleContextSensitiveTest {
 				nAfter++;
 			}
 		}
-		
+
 		if (nBefore==0 && nAfter==0) {
 			Assert.assertEquals("Undefined cohort def was not created", nAfter,1);
 		} else if (nBefore==0) {
@@ -155,5 +158,6 @@ public class DhisXmlUtilsTest extends BaseModuleContextSensitiveTest {
 		}
 		Assert.assertNotNull("AllPatients returned null",undefined);
 	}
+
 	
 }

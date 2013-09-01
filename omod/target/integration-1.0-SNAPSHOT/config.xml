@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module PUBLIC "-//OpenMRS//DTD OpenMRS Config 1.0//EN"
+                         "http://resources.openmrs.org/doctype/config-1.3.dtd">
 
-<module configVersion="1.2">
+<module configVersion="1.3">
 
 	<!-- Module Properties -->
 	<id>integration</id>
@@ -11,14 +13,18 @@
 	<description>
 		Integration module for DHIS2 and OpenMRS
 	</description>
+	
+	<!-- Module Activator -->
+	<activator>org.openmrs.module.integration.IntegrationActivator</activator>
+	
 	<updateURL>https://modules.openmrs.org/modules/download/integration/update.rdf</updateURL>
 	<require_version>1.9.0</require_version>
 	<!-- / Module Properties -->
 
-	
+
 	<!-- Required Modules -->
 	<require_modules>
-																											
+
 		<require_module version="0.7.8">
 			org.openmrs.module.reporting
 		</require_module>
@@ -30,21 +36,33 @@
 		</require_module>
 	</require_modules>
 	<!-- / Required Modules -->
-	
-	<!-- Module Activator -->
-	<activator>org.openmrs.module.integration.IntegrationActivator</activator>
-	
-	
+
 	<!-- Adds link to admin page -->
 	<extension>
 		<point>org.openmrs.admin.list</point>
 		<class>org.openmrs.module.integration.extension.html.AdminList</class>
 	</extension>
-	
+
 	<privilege>
 		<name>Manage Integration Servers</name>
 		<description>Allows the user to manage Integration module Servers</description>
 	</privilege>
+
+	<!-- Internationalization -->
+	<!-- All message codes should start with integration. -->
+	<messages>
+		<lang>en</lang>
+		<file>messages.properties</file>
+	</messages>
+	<messages>
+		<lang>fr</lang>
+		<file>messages_fr.properties</file>
+	</messages>
+	<messages>
+		<lang>es</lang>
+		<file>messages_es.properties</file>
+	</messages>
+	<!-- /Internationalization -->
 	
 	<!-- Maps hibernate file's, if present -->
 	<mappingFiles>
@@ -62,21 +80,4 @@
 				
 	</mappingFiles>
 
-	<!-- Internationalization -->
-	<!-- All message codes should start with integration. -->
-	<messages>
-		<lang>en</lang>
-		<file>messages.properties</file>
-	</messages>
-	<messages>
-		<lang>fr</lang>
-		<file>messages_fr.properties</file>
-	</messages>
-	<messages>
-		<lang>es</lang>
-		<file>messages_es.properties</file>
-	</messages>
-	<!-- /Internationalization -->
-
 </module>
-

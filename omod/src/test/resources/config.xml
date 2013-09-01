@@ -11,6 +11,7 @@
 	<description>
 		${project.parent.description}
 	</description>
+
 	<updateURL>https://modules.openmrs.org/modules/download/${project.parent.artifactId}/update.rdf</updateURL>
 	<require_version>${openMRSVersion}</require_version>
 	<!-- / Module Properties -->
@@ -28,18 +29,18 @@
 	
 	<!-- Module Activator -->
 	<activator>${project.parent.groupId}.${project.parent.artifactId}.IntegrationActivator</activator>
-	
-	
+
 	<!-- Adds link to admin page -->
 	<extension>
 		<point>org.openmrs.admin.list</point>
 		<class>${project.parent.groupId}.${project.parent.artifactId}.extension.html.AdminList</class>
 	</extension>
-	
+
 	<privilege>
 		<name>Manage Integration Servers</name>
 		<description>Allows the user to manage Integration module Servers</description>
 	</privilege>
+
 	
 	<!-- Maps hibernate file's, if present -->
 	<mappingFiles>
@@ -79,5 +80,5 @@
 	</messages>
 	<!-- /Internationalization -->
 
-</module>
 
+</module>

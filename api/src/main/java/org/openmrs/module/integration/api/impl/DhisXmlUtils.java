@@ -44,16 +44,16 @@ public class DhisXmlUtils {
 	private static String MODULE_NAME = "Integration";
 	private static String[] XML_SETS = {"master","cats","opts","orgs"};
 //	private MessageSourceService mss; 
-	
+
 	// Private variables
 	private DhisService ds;
 	private CohortDefinition undefined;
 	private CohortDefinition allPatients;
-	
+
 	public DhisXmlUtils() {
 //		mss = Context.getMessageSourceService();
 	}
-	
+
     /**
      * The undefined cohort is a singleton
      * @return the undefined cohort
@@ -108,7 +108,7 @@ public class DhisXmlUtils {
 	public String createNewServer(IntegrationServer is) {
 		ds=Context.getService(DhisService.class);
 		String result = "";
-		
+
 // save the server just in case
 		try {
 			ds.saveIntegrationServer(is);
@@ -153,11 +153,12 @@ public class DhisXmlUtils {
 		}
 		if (! "".equals(result))
 			return result;
+
 		
 		return buildDBObjects(sm);
 
 	}
-	
+
 	/**
 	 * Creates a new server from resources.  Primary use is testing
 	 * Creates a ServerMetadata representing the xml and uses it to build DB ojects.
@@ -170,6 +171,7 @@ public class DhisXmlUtils {
 	 */
 	public String createNewServer(String name, String master, String cats, String opts, String orgs) {
 		String result = "";
+
 		
 		ds=Context.getService(DhisService.class);
 		ServerMetadata sm = new ServerMetadata();
@@ -181,7 +183,7 @@ public class DhisXmlUtils {
 			result = e.getLocalizedMessage();
 			return result;
 		}
-		
+
 		IntegrationServer is = sm.getServer();
 		is.setServerName(name);
 		is.setUserName("username");
@@ -197,6 +199,7 @@ public class DhisXmlUtils {
 		}
 
 		result = buildDBObjects(sm);
+
 		
 		return result;
 	}
@@ -207,7 +210,7 @@ public class DhisXmlUtils {
 	 * @return string with error message or empty on success
 	 */
 	public String buildDBObjects(ServerMetadata sm) {
-		
+
 		String result = "";
 		IntegrationServer is = sm.getServer();
 
@@ -222,6 +225,7 @@ public class DhisXmlUtils {
 				opv.setUid(xco.getId());
 				ds.saveOption(opv);
 				ops.getOptions().add(opv);
+
 			}	
 			ds.saveOptionSet(ops);
 		}
@@ -259,12 +263,13 @@ public class DhisXmlUtils {
 				}
 			}
 		}
-		
+
 // process data elements
 		for (ReportTemplates.DataElements.DataElement xde : sm.getDataElements()) {
 			DataElement de = new DataElement();
 			de.setDataElementName(xde.getName());
 			de.setDataElementCode(xde.getCode());
+
 			if (de.getDataElementCode()==null) {
 				de.setDataElementCode(xde.getUid());
 			}
@@ -272,6 +277,7 @@ public class DhisXmlUtils {
 			de.setIntegrationServer(is);
 			ds.saveDataElement(de);
 		}
+
 
 // add codes to disaggregations
 		for (ReportTemplates.Disaggregations.Disaggregation xd : sm.getMaster().getDisaggregations().getDisaggregation()) {
@@ -295,6 +301,7 @@ public class DhisXmlUtils {
 				DataValueTemplate dv = new DataValueTemplate();
 				dv.setReportTemplate(rt);
 				dv.setIntegrationServer(is);
+
 				DataElement de = ds.getDataElementByCode(xdv.getDataElement(),is);
 				if (de==null) {
 					de = ds.getDataElementByUid(xdv.getDataElement(),is);
@@ -313,8 +320,8 @@ public class DhisXmlUtils {
 					}
 				}
 			}
+
 		}
-		
 //process org units
 		if (sm.getOrgs().size() == 0) {
 //			result = mss.getMessage("DhisXml.CreateNewServer.NoOrgs");
@@ -353,6 +360,7 @@ public class DhisXmlUtils {
 //keep passing through all org units units a level is reached with no org units
 //so long as we have processed some units
 		} while (nOrg==0);  
+
 		
 		
 		return result;
