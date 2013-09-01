@@ -44,16 +44,16 @@ public class DhisXmlUtils {
 	private static String MODULE_NAME = "Integration";
 	private static String[] XML_SETS = {"master","cats","opts","orgs"};
 //	private MessageSourceService mss; 
-	
+
 	// Private variables
 	private DhisService ds;
 	private CohortDefinition undefined;
 	private CohortDefinition allPatients;
-	
+
 	public DhisXmlUtils() {
 //		mss = Context.getMessageSourceService();
 	}
-	
+
     /**
      * The undefined cohort is a singleton
      * @return the undefined cohort
@@ -108,7 +108,7 @@ public class DhisXmlUtils {
 	public String createNewServer(IntegrationServer is) {
 		ds=Context.getService(DhisService.class);
 		String result = "";
-		
+
 // save the server just in case
 		try {
 			ds.saveIntegrationServer(is);
@@ -153,11 +153,11 @@ public class DhisXmlUtils {
 		}
 		if (! "".equals(result))
 			return result;
-		
+
 		return buildDBObjects(sm);
 
 	}
-	
+
 	/**
 	 * Creates a new server from resources.  Primary use is testing
 	 * Creates a ServerMetadata representing the xml and uses it to build DB ojects.
@@ -170,10 +170,10 @@ public class DhisXmlUtils {
 	 */
 	public String createNewServer(String name, String master, String cats, String opts, String orgs) {
 		String result = "";
-		
+
 		ds=Context.getService(DhisService.class);
 		ServerMetadata sm = new ServerMetadata();
-		
+
 		try {
 			sm.getServerMetadata(master, cats, opts);
 			sm.getOrgUnits(orgs);
@@ -181,7 +181,7 @@ public class DhisXmlUtils {
 			result = e.getLocalizedMessage();
 			return result;
 		}
-		
+
 		IntegrationServer is = sm.getServer();
 		is.setServerName(name);
 		is.setUserName("username");
@@ -197,17 +197,17 @@ public class DhisXmlUtils {
 		}
 
 		result = buildDBObjects(sm);
-		
+
 		return result;
 	}
-	
+
 	/**
 	 * Traverses ServerMetadata to build DB objects.
 	 * @param sm the ServerMetadata from which to build the DB object
 	 * @return string with error message or empty on success
 	 */
 	public String buildDBObjects(ServerMetadata sm) {
-		
+
 		String result = "";
 		IntegrationServer is = sm.getServer();
 
@@ -258,7 +258,7 @@ public class DhisXmlUtils {
 				}
 			}
 		}
-		
+
 // process data elements
 		for (ReportTemplates.DataElements.DataElement xde : sm.getDataElements()) {
 			DataElement de = new DataElement();
@@ -297,7 +297,7 @@ public class DhisXmlUtils {
 					}
 				}
 			}
-		
+
 //process org units
 		if (sm.getOrgs().size() == 0) {
 //			result = mss.getMessage("DhisXml.CreateNewServer.NoOrgs");
@@ -320,8 +320,11 @@ public class DhisXmlUtils {
 						org.setUid(xorg.getId());
 						org.setCode(xorg.getCode());
 						org.setIntegrationServer(is);
+						ds.saveOrgUnit(org);
 						if (xorg.getParent() != null) {
-							org.setParentOrg(ds.getOrgUnitByUid(xorg.getParent().getId(),is));
+							OrgUnit parent=ds.getOrgUnitByUid(xorg.getParent().getId(),is);
+							parent.getChildOrgs().add(org);
+							ds.saveOrgUnit(parent);
 						}
 						ds.saveOrgUnit(org);
 					}
@@ -331,8 +334,8 @@ public class DhisXmlUtils {
 //keep passing through all org units units a level is reached with no org units
 //so long as we have processed some units
 		} while (nOrg==0);  
-		
-		
+
+
 		return result;
 	}
 }

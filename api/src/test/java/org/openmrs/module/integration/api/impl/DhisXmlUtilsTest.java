@@ -31,7 +31,7 @@ public class DhisXmlUtilsTest extends BaseModuleContextSensitiveTest {
 //	public Boolean useInMemoryDatabase() {
 //		return false;
 //	}
-	
+
 	@Before
 	public void setup() {
 		is = new IntegrationServer();
@@ -41,22 +41,35 @@ public class DhisXmlUtilsTest extends BaseModuleContextSensitiveTest {
 		is.setUserName("admin");
 		is.setPassword("district");
 		ds=Context.getService(DhisService.class);
+	}
+
+	@Test
+	public void DhisXmlUtils_shouldSeeDhisObjects() {
+		int n=0;
 		Map<String,ClassMetadata> h=ds.getHibernateClassMetadata();
-		String t;
 		for (String s : h.keySet()) {
-				t=s;
+			if (s.contains("IntegrationServer")) n++;
+			else if (s.contains("ReportTemplate")) n++;
+			else if (s.contains("DataValueTemplate")) n++;
+			else if (s.contains("CategoryCombo")) n++;
+			else if (s.contains("CategoryOption")) n++;
+			else if (s.contains("OptionSet")) n++;
+			else if (s.contains("Option")) n++;
+			else if (s.contains("DataElement")) n++;
+			else if (s.contains("OrgUnit")) n++;
 		}
 		h=null;
+		Assert.assertEquals("Dhis objects are missing",n,9);
 	}
 
 	@Test
 	public void createNewServer_shouldWorkForResources(){
 		String s = dxu.createNewServer("RESOURCES","MasterTemplate.xml", "CategoryOptionCombo-Detailed.xml", "Categories-Export.xml","OrganisationUnit-Export.xml");
-		
+
 		Assert.assertEquals("Error is returned:" + s,s,"");
 		Assert.assertNotNull("Orgs is null", ds.getIntegrationServerByName("RESOURCES"));		
 	}
-	
+
 	@Ignore
 	@Test
 	public void getAllPatients_shouldAddCohortDefOnlyIfNecessary() {
@@ -76,7 +89,7 @@ public class DhisXmlUtilsTest extends BaseModuleContextSensitiveTest {
 				nAfter++;
 			}
 		}
-		
+
 		if (nBefore==0 && nAfter==0) {
 			Assert.assertEquals("All patients was not created", nAfter,1);
 		} else if (nBefore==0) {
@@ -115,7 +128,7 @@ public class DhisXmlUtilsTest extends BaseModuleContextSensitiveTest {
 				nAfter++;
 			}
 		}
-		
+
 		if (nBefore==0 && nAfter==0) {
 			Assert.assertEquals("Undefined cohort def was not created", nAfter,1);
 		} else if (nBefore==0) {
@@ -134,5 +147,5 @@ public class DhisXmlUtilsTest extends BaseModuleContextSensitiveTest {
 		}
 		Assert.assertNotNull("AllPatients returned null",undefined);
 	}
-	
+
 }

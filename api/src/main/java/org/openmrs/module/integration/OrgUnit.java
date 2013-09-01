@@ -1,5 +1,8 @@
 package org.openmrs.module.integration;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmrs.BaseOpenmrsObject;
@@ -11,7 +14,7 @@ public class OrgUnit extends BaseOpenmrsObject {
 	private String name;
 	private String code;
 	private String uid;
-	private OrgUnit parentOrg;
+	private Set<OrgUnit> childOrgs;
 	private IntegrationServer integrationServer;
 
 	@Override
@@ -31,7 +34,7 @@ public class OrgUnit extends BaseOpenmrsObject {
 	public void setOrgUnitId(int orgUnitId) {
 		this.orgUnitId = orgUnitId;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -39,7 +42,7 @@ public class OrgUnit extends BaseOpenmrsObject {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public String getCode() {
 		return code;
 	}
@@ -47,7 +50,7 @@ public class OrgUnit extends BaseOpenmrsObject {
 	public void setCode(String code) {
 		this.code = code;
 	}
-	
+
 	public String getUid() {
 		return uid;
 	}
@@ -55,16 +58,19 @@ public class OrgUnit extends BaseOpenmrsObject {
 	public void setUid(String uid) {
 		this.uid = uid;
 	}
-	
-	
-	public OrgUnit getParentOrg() {
-		return parentOrg;
+
+
+	public Set<OrgUnit> getChildOrgs() {
+		if (childOrgs==null) {
+			childOrgs=new HashSet<OrgUnit>();
+		}
+		return childOrgs;
 	}
 
-	public void setParentOrg(OrgUnit parentOrg) {
-		this.parentOrg = parentOrg;
+	public void setChildOrgs(Set<OrgUnit> childOrgs) {
+		this.childOrgs = childOrgs;
 	}
-	
+
 	public void setIntegrationServer(IntegrationServer integrationServer)
     {
         this.integrationServer = integrationServer;
