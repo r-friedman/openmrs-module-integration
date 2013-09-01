@@ -44,28 +44,16 @@ public class DhisXmlUtils {
 	private static String MODULE_NAME = "Integration";
 	private static String[] XML_SETS = {"master","cats","opts","orgs"};
 //	private MessageSourceService mss; 
-<<<<<<< HEAD
 
-=======
-	
->>>>>>> 838b652e24eea5d481397bff143becf1997bbddd
 	// Private variables
 	private DhisService ds;
 	private CohortDefinition undefined;
 	private CohortDefinition allPatients;
-<<<<<<< HEAD
 
 	public DhisXmlUtils() {
 //		mss = Context.getMessageSourceService();
 	}
 
-=======
-	
-	public DhisXmlUtils() {
-//		mss = Context.getMessageSourceService();
-	}
-	
->>>>>>> 838b652e24eea5d481397bff143becf1997bbddd
     /**
      * The undefined cohort is a singleton
      * @return the undefined cohort
@@ -120,11 +108,7 @@ public class DhisXmlUtils {
 	public String createNewServer(IntegrationServer is) {
 		ds=Context.getService(DhisService.class);
 		String result = "";
-<<<<<<< HEAD
 
-=======
-		
->>>>>>> 838b652e24eea5d481397bff143becf1997bbddd
 // save the server just in case
 		try {
 			ds.saveIntegrationServer(is);
@@ -169,19 +153,12 @@ public class DhisXmlUtils {
 		}
 		if (! "".equals(result))
 			return result;
-<<<<<<< HEAD
 
-		return buildDBObjects(sm);
-
-	}
-
-=======
 		
 		return buildDBObjects(sm);
 
 	}
-	
->>>>>>> 838b652e24eea5d481397bff143becf1997bbddd
+
 	/**
 	 * Creates a new server from resources.  Primary use is testing
 	 * Creates a ServerMetadata representing the xml and uses it to build DB ojects.
@@ -194,17 +171,11 @@ public class DhisXmlUtils {
 	 */
 	public String createNewServer(String name, String master, String cats, String opts, String orgs) {
 		String result = "";
-<<<<<<< HEAD
 
-		ds=Context.getService(DhisService.class);
-		ServerMetadata sm = new ServerMetadata();
-
-=======
 		
 		ds=Context.getService(DhisService.class);
 		ServerMetadata sm = new ServerMetadata();
 		
->>>>>>> 838b652e24eea5d481397bff143becf1997bbddd
 		try {
 			sm.getServerMetadata(master, cats, opts);
 			sm.getOrgUnits(orgs);
@@ -212,11 +183,7 @@ public class DhisXmlUtils {
 			result = e.getLocalizedMessage();
 			return result;
 		}
-<<<<<<< HEAD
 
-=======
-		
->>>>>>> 838b652e24eea5d481397bff143becf1997bbddd
 		IntegrationServer is = sm.getServer();
 		is.setServerName(name);
 		is.setUserName("username");
@@ -232,28 +199,18 @@ public class DhisXmlUtils {
 		}
 
 		result = buildDBObjects(sm);
-<<<<<<< HEAD
 
-		return result;
-	}
-
-=======
 		
 		return result;
 	}
 	
->>>>>>> 838b652e24eea5d481397bff143becf1997bbddd
 	/**
 	 * Traverses ServerMetadata to build DB objects.
 	 * @param sm the ServerMetadata from which to build the DB object
 	 * @return string with error message or empty on success
 	 */
 	public String buildDBObjects(ServerMetadata sm) {
-<<<<<<< HEAD
 
-=======
-		
->>>>>>> 838b652e24eea5d481397bff143becf1997bbddd
 		String result = "";
 		IntegrationServer is = sm.getServer();
 
@@ -268,12 +225,9 @@ public class DhisXmlUtils {
 				opv.setUid(xco.getId());
 				ds.saveOption(opv);
 				ops.getOptions().add(opv);
-<<<<<<< HEAD
-			}		
-=======
+
 			}	
 			ds.saveOptionSet(ops);
->>>>>>> 838b652e24eea5d481397bff143becf1997bbddd
 		}
 
 // process categorycombos/categoryoptions
@@ -309,29 +263,22 @@ public class DhisXmlUtils {
 				}
 			}
 		}
-<<<<<<< HEAD
 
-=======
-		
->>>>>>> 838b652e24eea5d481397bff143becf1997bbddd
 // process data elements
 		for (ReportTemplates.DataElements.DataElement xde : sm.getDataElements()) {
 			DataElement de = new DataElement();
 			de.setDataElementName(xde.getName());
 			de.setDataElementCode(xde.getCode());
-<<<<<<< HEAD
-=======
+
 			if (de.getDataElementCode()==null) {
 				de.setDataElementCode(xde.getUid());
 			}
->>>>>>> 838b652e24eea5d481397bff143becf1997bbddd
 			de.setDataElementUid(xde.getUid());
 			de.setIntegrationServer(is);
 			ds.saveDataElement(de);
 		}
 
-<<<<<<< HEAD
-=======
+
 // add codes to disaggregations
 		for (ReportTemplates.Disaggregations.Disaggregation xd : sm.getMaster().getDisaggregations().getDisaggregation()) {
 			CategoryOption co = ds.getCategoryOptionByUid(xd.getUid(), is);
@@ -341,7 +288,6 @@ public class DhisXmlUtils {
 			}
 		}
 		
->>>>>>> 838b652e24eea5d481397bff143becf1997bbddd
 // process report definitions
 		for (ReportTemplates.ReportTemplate xrt : sm.getReportTemplates()) {
 			ReportTemplate rt = new ReportTemplate();
@@ -355,14 +301,7 @@ public class DhisXmlUtils {
 				DataValueTemplate dv = new DataValueTemplate();
 				dv.setReportTemplate(rt);
 				dv.setIntegrationServer(is);
-<<<<<<< HEAD
-				dv.setDataElement(ds.getDataElementByUid(xdv.getDataElement(),is));
-				dv.setCategoryOption(ds.getCategoryOptionByUid(xdv.getDisaggregation(),is));
-				ds.saveDataValueTemplate(dv);
-				rt.getDataValueTemplates().add(dv);
-				DataElement de = ds.getDataElementByUid(xdv.getDataElement(),is);
-				if (de != null)
-=======
+
 				DataElement de = ds.getDataElementByCode(xdv.getDataElement(),is);
 				if (de==null) {
 					de = ds.getDataElementByUid(xdv.getDataElement(),is);
@@ -372,7 +311,6 @@ public class DhisXmlUtils {
 					dv.setCategoryOption(ds.getCategoryOptionByUid(xdv.getDisaggregation(),is));
 					ds.saveDataValueTemplate(dv);
 					rt.getDataValueTemplates().add(dv);
->>>>>>> 838b652e24eea5d481397bff143becf1997bbddd
 					if (de.getCategoryCombo() == null) {
 						Iterator<CategoryCombo> it = ds.getCategoryOptionByUid(xdv.getDisaggregation(),is).getCategoryCombos().iterator();
 						CategoryCombo cb=it.next();
@@ -382,12 +320,8 @@ public class DhisXmlUtils {
 					}
 				}
 			}
-<<<<<<< HEAD
 
-=======
 		}
-		
->>>>>>> 838b652e24eea5d481397bff143becf1997bbddd
 //process org units
 		if (sm.getOrgs().size() == 0) {
 //			result = mss.getMessage("DhisXml.CreateNewServer.NoOrgs");
@@ -413,15 +347,10 @@ public class DhisXmlUtils {
 						ds.saveOrgUnit(org);
 						if (xorg.getParent() != null) {
 							OrgUnit parent=ds.getOrgUnitByUid(xorg.getParent().getId(),is);
-<<<<<<< HEAD
-							parent.getChildOrgs().add(org);
-							ds.saveOrgUnit(parent);
-=======
 							if (parent!=null) {
 								parent.getChildOrgs().add(org);
 								ds.saveOrgUnit(parent);
 							}
->>>>>>> 838b652e24eea5d481397bff143becf1997bbddd
 						}
 						ds.saveOrgUnit(org);
 					}
@@ -431,16 +360,9 @@ public class DhisXmlUtils {
 //keep passing through all org units units a level is reached with no org units
 //so long as we have processed some units
 		} while (nOrg==0);  
-<<<<<<< HEAD
 
-
-		return result;
-	}
-}
-=======
 		
 		
 		return result;
 	}
 }
->>>>>>> 838b652e24eea5d481397bff143becf1997bbddd

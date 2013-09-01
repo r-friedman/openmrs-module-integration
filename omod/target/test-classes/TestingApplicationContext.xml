@@ -25,10 +25,17 @@
 		</property>
 		<!--  default properties must be set in the hibernate.default.properties -->
 	</bean>
+<<<<<<< HEAD
 
 
 	<!--  we definite the name support beans here so that we can access them to test functions that use them -->
 
+=======
+	
+	
+	<!--  we definite the name support beans here so that we can access them to test functions that use them -->
+	
+>>>>>>> 838b652e24eea5d481397bff143becf1997bbddd
     <!-- specialTokens ordered so that the subset string 'familyName' is last -->
     <bean id="nameSupport" class="org.openmrs.layout.web.name.NameSupport">
         <property name="defaultLayoutFormat"><value>spain</value></property>
@@ -78,5 +85,10 @@
     </bean>
     
     
+<<<<<<< HEAD
 
 </beans>
+=======
+	
+</beans>
+>>>>>>> 838b652e24eea5d481397bff143becf1997bbddd

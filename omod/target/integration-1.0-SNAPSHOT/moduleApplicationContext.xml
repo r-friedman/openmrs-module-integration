@@ -91,19 +91,19 @@
 
 	<!-- Add here beans related to the API context -->
 	
-	   
-	<bean id="mappingCohortController" class="org.openmrs.module.integration.web.controller.portlet.MappingCohortController">
+<!--	   
+	<bean id="mappingCohortController" class="org.openmrs.module.integration.web.controller.MappingCohortPortletController">
     </bean>
 	
 	 <bean id="basicUrlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
     	<property name="order"><value>50</value></property>
     	<property name="mappings">
             <props>
-	           <prop key="**/mappingCohort.portlet">mappingCohortController</prop>
+	           <prop key="**/mappingCohort.portlet">mappingCohortPortletController</prop>
 	    	</props>
 		</property>
     </bean>
- 
+-->
    
 	
 	<!-- Services accessible via Context.getService() -->
@@ -137,5 +137,7 @@
 			</list>
 		</property>
 	</bean>
+	
+	<context:component-scan base-package="org.openmrs.module.integration" />
 </beans>
 >>>>>>> 838b652e24eea5d481397bff143becf1997bbddd

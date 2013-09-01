@@ -27,19 +27,11 @@ public class DhisXmlUtilsTest extends BaseModuleContextSensitiveTest {
 	private DhisXmlUtils dxu = new DhisXmlUtils();
 	private DhisService ds;
 
-<<<<<<< HEAD
-//	@Override
-//	public Boolean useInMemoryDatabase() {
-//		return false;
-//	}
-
-=======
 	@Override
 	public Boolean useInMemoryDatabase() {
 		return false;
 	}
 	
->>>>>>> 838b652e24eea5d481397bff143becf1997bbddd
 	@Before
 	public void setup() {
 		is = new IntegrationServer();
@@ -50,16 +42,12 @@ public class DhisXmlUtilsTest extends BaseModuleContextSensitiveTest {
 		is.setPassword("district");
 		ds=Context.getService(DhisService.class);
 	}
-<<<<<<< HEAD
 
-	@Test
-	public void DhisXmlUtils_shouldSeeDhisObjects() {
-=======
 	
 	@Ignore
 	@Test
 	public void dhisXmlUtils_shouldSeeDhisObjects() {
->>>>>>> 838b652e24eea5d481397bff143becf1997bbddd
+
 		int n=0;
 		Map<String,ClassMetadata> h=ds.getHibernateClassMetadata();
 		for (String s : h.keySet()) {
@@ -77,16 +65,7 @@ public class DhisXmlUtilsTest extends BaseModuleContextSensitiveTest {
 		Assert.assertEquals("Dhis objects are missing",n,9);
 	}
 
-<<<<<<< HEAD
-	@Test
-	public void createNewServer_shouldWorkForResources(){
-		String s = dxu.createNewServer("RESOURCES","MasterTemplate.xml", "CategoryOptionCombo-Detailed.xml", "Categories-Export.xml","OrganisationUnit-Export.xml");
 
-		Assert.assertEquals("Error is returned:" + s,s,"");
-		Assert.assertNotNull("Orgs is null", ds.getIntegrationServerByName("RESOURCES"));		
-	}
-
-=======
 	@Ignore
 	@Test
 	public void createNewServer_shouldWorkForResources(){
@@ -102,7 +81,6 @@ public class DhisXmlUtilsTest extends BaseModuleContextSensitiveTest {
 		Assert.assertEquals("Error is returned:" + s,s,"");
 	}
 	
->>>>>>> 838b652e24eea5d481397bff143becf1997bbddd
 	@Ignore
 	@Test
 	public void getAllPatients_shouldAddCohortDefOnlyIfNecessary() {
@@ -122,11 +100,7 @@ public class DhisXmlUtilsTest extends BaseModuleContextSensitiveTest {
 				nAfter++;
 			}
 		}
-<<<<<<< HEAD
 
-=======
-		
->>>>>>> 838b652e24eea5d481397bff143becf1997bbddd
 		if (nBefore==0 && nAfter==0) {
 			Assert.assertEquals("All patients was not created", nAfter,1);
 		} else if (nBefore==0) {
@@ -165,11 +139,7 @@ public class DhisXmlUtilsTest extends BaseModuleContextSensitiveTest {
 				nAfter++;
 			}
 		}
-<<<<<<< HEAD
 
-=======
-		
->>>>>>> 838b652e24eea5d481397bff143becf1997bbddd
 		if (nBefore==0 && nAfter==0) {
 			Assert.assertEquals("Undefined cohort def was not created", nAfter,1);
 		} else if (nBefore==0) {
@@ -188,10 +158,6 @@ public class DhisXmlUtilsTest extends BaseModuleContextSensitiveTest {
 		}
 		Assert.assertNotNull("AllPatients returned null",undefined);
 	}
-<<<<<<< HEAD
 
-}
-=======
 	
 }
->>>>>>> 838b652e24eea5d481397bff143becf1997bbddd
