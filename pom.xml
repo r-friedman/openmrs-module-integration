@@ -55,18 +55,14 @@
 			<!-- Begin OpenMRS modules -->	
 						
 			<dependency>
-			
 				<groupId>org.openmrs.module</groupId>
-												
 				<artifactId>reporting-api</artifactId>
-																								
-				<version>0.7.8</version>
-												
-				<scope>provided</scope>
-				
+				<version>0.7.8</version>												
+				<scope>provided</scope>				
 			</dependency>
 			
 			<dependency>
+<<<<<<< HEAD
 
 				<groupId>org.openmrs.module</groupId>
 
@@ -76,9 +72,16 @@
 
 				<scope>provided</scope>
 
+=======
+				<groupId>org.openmrs.module</groupId>						
+				<artifactId>calculation-api</artifactId>											
+				<version>1.0</version>
+				<scope>provided</scope>
+>>>>>>> 838b652e24eea5d481397bff143becf1997bbddd
 			</dependency>
 
 			<dependency>
+<<<<<<< HEAD
 
 				<groupId>org.openmrs.module</groupId>
 
@@ -88,6 +91,12 @@
 
 				<scope>provided</scope>
 
+=======
+				<groupId>org.openmrs.module</groupId>						
+				<artifactId>serialization.xstream-api</artifactId>											
+				<version>0.2.7</version>
+				<scope>provided</scope>
+>>>>>>> 838b652e24eea5d481397bff143becf1997bbddd
 			</dependency>
 						
 			<!-- End OpenMRS modules -->

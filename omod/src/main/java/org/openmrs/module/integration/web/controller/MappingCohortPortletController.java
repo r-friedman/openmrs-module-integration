@@ -1,5 +1,8 @@
 package org.openmrs.module.integration.web.controller;
+<<<<<<< HEAD:omod/src/main/java/org/openmrs/module/integration/web/controller/MappingCohortPortletController.java
 
+=======
+>>>>>>> 838b652e24eea5d481397bff143becf1997bbddd:omod/src/main/java/org/openmrs/module/integration/web/controller/MappingCohortPortletController.java
 
 import java.util.List;
 import java.util.Map;
