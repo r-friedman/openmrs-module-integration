@@ -27,11 +27,11 @@ public class ServiceLocationCohortDefinition extends EncounterCohortDefinition {
 	private static String MODULE_NAME = "Integration";
 	private static String INSTANCE_NAME = "Patients Served at Location during Time Period";
 	private static String INSTANCE_DESC = "For use by " + MODULE_NAME;
-	private static String LOC_PARAM_NAME = "Location List";
+	private static String LOC_PARAM_NAME = "locationList";
 	private static String LOC_PARAM_LABEL = "location";
-	private static String START_PARAM_NAME = "Start Date";
+	private static String START_PARAM_NAME = "onOrAfter";
 	private static String START_PARAM_LABEL = "startDate";
-	private static String END_PARAM_NAME = "End Date";
+	private static String END_PARAM_NAME = "onOrBefore";
 	private static String END_PARAM_LABEL = "endDate";
 	
 	public ServiceLocationCohortDefinition() {
@@ -44,6 +44,15 @@ public class ServiceLocationCohortDefinition extends EncounterCohortDefinition {
 		p.setCollectionType(java.util.List.class);
 		p.setType(org.openmrs.Location.class);
 		List<Parameter> pp=new ArrayList<Parameter>();
+		pp.add(p);
+		p = new Parameter();
+		p.setName(START_PARAM_NAME);
+		p.setLabel(START_PARAM_LABEL);
+		p.setType(Date.class);
+		pp.add(p);
+		p.setName(END_PARAM_NAME);
+		p.setLabel(END_PARAM_LABEL);
+		p.setType(Date.class);
 		pp.add(p);
 		super.setParameters(pp);
 		super.setTimeQualifier(TimeQualifier.ANY);
